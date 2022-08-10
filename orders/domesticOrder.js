@@ -2,8 +2,8 @@ require('dotenv').config();
 
 
 const Easypost = require('@easypost/api');
-// const apiKey = process.env.testKey;
-const apiKey = process.env.prodKey;
+const apiKey = process.env.testKey;
+// const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 
@@ -50,6 +50,9 @@ const order = new api.Order({
                 height: 14.6,
                 length: 14.6,
             },
+            options: {
+                label_format: "ZPL"
+            }
         }),
         new api.Shipment({
             parcel: {
@@ -58,6 +61,9 @@ const order = new api.Order({
                 height: 13.83,
                 length: 13.83,
             },
+            options: {
+                label_format: "ZPL"
+            }
         }),
         // new api.Shipment({
         //     parcel: {
@@ -78,7 +84,7 @@ const order = new api.Order({
     ],
     // carrier_accounts: [{"id":"ca_e5ecb8da97d643349f1c57ccd143eb91"}, {"id":"ca_b281591570e24e0c961a09901a5c2b57"}],
     // carrier_accounts: [ {"id":"ca_b281591570e24e0c961a09901a5c2b57"}],
-    carrier_accounts: [{ id: process.env.USPS }],
+    carrier_accounts: [{ id: process.env.FEDEX }],
 });
 
 order.save().then(console.log).catch(console.log);

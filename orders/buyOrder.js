@@ -9,8 +9,8 @@ const api = new Easypost(apiKey);
 
 
 
-api.Order.retrieve('order_d52c4f8d967d45c4aa533f31a41b72bf').then(order => {
-    order.buy('DHLExpress', 'ExpressWorldwideNonDoc').then(console.log).catch(console.log)
+api.Order.retrieve('order_cfee761195044829b0f3e303e3aa6736').then(order => {
+    order.buy('FedEx', 'FEDEX_2_DAY').then(console.log).catch(console.log)
 }).catch(console.log);
 
 

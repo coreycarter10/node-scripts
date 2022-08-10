@@ -9,16 +9,16 @@ const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
   verify: ["delivery", "zip4"],
-  company: "Swing Away Golf Studio",
-  name: "Brandon Kida",
-  street1: "2258 Caminito Pescado #12",
+  company: "Stark Tower",
+  name: "Tony Stark",
+  street1: "200 Park Ave",
   // street2: '',
-  city: "San Diego",
-  state: "CA",
-  zip: "92107",
+  city: "New York",
+  state: "NY",
+  zip: "10079",
   country: "US",
-  phone: "8015401281",
-  email: "kidakat15@gmail.com",
+  phone: "8012220000",
+  email: "email@email.com",
 
   // name: 'Bob',
   // street1: '820 E Newfield Dr',
@@ -33,16 +33,16 @@ const toAddress = new api.Address({
 });
 
 const fromAddress = new api.Address({
-  company: "EasyPost",
-  name: "Corey Carter",
-  street1: "37620 N Poplar road",
-  // street2: "STE B",
-  city: "San Tan Valley",
-  state: "AZ",
-  zip: "85140",
+  company: "StoreMcStoreFace",
+  name: "John Smith",
+  street1: "358 S 700 E",
+  street2: "STE B",
+  city: "Salt Lake City",
+  state: "UT",
+  zip: "84102",
   country: "US",
-  phone: "8013761006",
-  email: "ccarter@easypost.com",
+  phone: "4165555556",
+  email: "TEST123@YOPMAIL.COM",
 
   //  company: 'EasyPost',
   //  name: 'Mr. EP',
@@ -57,16 +57,16 @@ const fromAddress = new api.Address({
 });
 
 const returnAddress = new api.Address({
-  company: "EasyPost",
-  name: "Corey Carter",
-  street1: "37620 N Poplar road",
-  // street2: "STE B",
-  city: "San Tan Valley",
-  state: "AZ",
-  zip: "85140",
+  company: "StoreMcStoreFace",
+  name: "John Smith",
+  street1: "358 S 700 E",
+  street2: "STE B",
+  city: "Salt Lake City",
+  state: "UT",
+  zip: "84102",
   country: "US",
-  phone: "8013761006",
-  email: "ccarter@easypost.com",
+  phone: "4165555556",
+  email: "TEST123@YOPMAIL.COM",
 });
 
 // fromAddress.save().then(console.log).catch(console.log);
@@ -83,11 +83,11 @@ const returnAddress = new api.Address({
 // const fromAddress = new api.Address({ "id": "adr_b2904a39f49d4b1eb0b632395302cc78" });
 
 const parcel = new api.Parcel({
-  // predefined_package: "FedExPak",
+  // predefined_package: 'FlatRatePaddedEnvelope',
   length: 5,
   width: 5,
   height: 5,
-  weight: 5,
+  weight: 10,
 });
 
 // parcel.save().then(console.log);
@@ -96,11 +96,11 @@ const parcel = new api.Parcel({
 const shipment = new api.Shipment({
   to_address: toAddress,
   from_address: fromAddress,
-  return_address: returnAddress,
+  // return_address: returnAddress,
   parcel: parcel,
   // carrier: 'USPS',
   // service: 'First',
-  // reference: 'Insurance testing',
+  // reference: 'Testing',
   // is_return: true,
   // ancillary_endorsement: true,
   options: {
@@ -109,18 +109,14 @@ const shipment = new api.Shipment({
     // label_date: '2020-05-29',
     // endorsement: 'ADDRESS_SERVICE_REQUESTED',
     // carrier_insurance_amount: 999.99
-    // print_custom_1: 'Print custom 1',
-    // print_custom_2: "Print custom 2",
-    // print_custom_3: "Print custom 3",
+    // print_custom_1: 'TESTING!!!!!!',
     // print_custom_1_code: 'reference'
     // label_format: 'PDF',
-    // label_size: '8.5X11',
-    // commercial_invoice_letterhead: 'IMAGE_1',
-    //  commercial_invoice_signature: 'IMAGE_2',
+    // label_size: '8.5X11_TOP_HALF_LABEL',
     // certified_mail: true,
     // return_receipt: true,
     // dropoff_type: "DROP_BOX",
-    // delivery_confirmation: 'ADULT_SIGNATURE',
+    // delivery_confirmation: 'SIGNATURE',
     // pickup_min_datetime: '2022-02-18T07:00:00.000Z',
     // pickup_max_datetime: '2022-02-22T07:00:00.000Z',
     // delivery_min_datetime: '2022-02-18T07:00:00.000Z',
@@ -135,8 +131,8 @@ const shipment = new api.Shipment({
     //   country: 'US'
     // }
   },
-  carrier_accounts: [process.env.FEDEX],
-  // carrier_accounts: ['ca_51c5e89603c64c04b4ed3d55a3547c8a']
+  // carrier_accounts: [process.env.FEDEX],
+  // carrier_accounts: ['ca_c94828304bdd4a4789268954764e485d']
 });
 
 //SOME VARIOUS WAYS TO RETURN RESPONSE BODY INFO I'VE PLAYED AROUND WITH
@@ -156,18 +152,11 @@ const shipment = new api.Shipment({
 //   })
 // }).catch(console.log);
 
-shipment.save().then((s) => {
-  for (i = 0; i < s.rates.length; i++) {
-    console.log(
-      s.rates[i].carrier +
-        " " +
-        s.rates[i].service +
-        " " +
-        "$" +
-        s.rates[i].rate
-    );
-  }
-});
+// shipment.save().then((s) => {
+//   for (i = 0; i < s.rates.length; i++) {
+//     console.log(s.rates[i].service + " " + "$" + s.rates[i].rate);
+//   }
+// });
 
 // shipment.save().then(s => {
 //   console.log(s.rates[0].service);
@@ -178,7 +167,7 @@ shipment.save().then((s) => {
 
 // shipment.save().then(console.log).catch(console.log);
 
-//============buy shipment by lowest rate============
+// ============buy shipment by lowest rate============
 shipment
   .save()
   .then((s) => {
@@ -187,18 +176,12 @@ shipment
   .catch(console.log);
 
 // ============Buy Shipment by ID============
-// api.Shipment.retrieve("shp_c5110c1e8a244a4fb4910b9104dd2770")
-//   .then((s) => {
-//     s.buy("rate_2f6cb312577b40c7b765cec66b65014c")
-//       .then(console.log)
-//       .catch(console.log);
-//   })
-//   .catch(console.log);
+// api.Shipment.retrieve('shp_a550cf9a459e44c1820d6c9a56b3e0af').then(s => {
+//   s.buy('rate_61a287ffce394832b96ed9ed013d7f1b').then(console.log).catch(console.log);
+// }).catch(console.log);
 
 //============buy shipment by carrier name/service type============
-// shipment
-//   .save()
-//   .then((buyShipment) => {
-//     shipment.buy("UPS", "Ground").then(console.log).catch(console.log);
-//   })
-//   .catch(console.log);
+// shipment.save().then(buyShipment => {
+//   shipment.buy('USPS', 'First')
+//     .then(console.log).catch(console.log);
+// }).catch(console.log);

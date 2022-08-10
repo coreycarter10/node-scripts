@@ -1,12 +1,10 @@
-require('dotenv').config();
+require("dotenv").config();
 
-
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 // const apiKey = process.env.testKey;
-// const apiKey = process.env.prodKey;
+const apiKey = process.env.prodKey;
 
-
-const apiKey = process.env.personalProdKey;
+// const apiKey = process.env.personalProdKey;
 const api = new Easypost(apiKey);
 
 //list all carrier accounts

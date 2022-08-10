@@ -1,103 +1,95 @@
-require('dotenv').config();
-
+require("dotenv").config();
 
 const Easypost = require('@easypost/api');
-// const apiKey = process.env.personalTestKey
-// const apiKey = process.env.personalProdKey
-
 
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
+
 const api = new Easypost(apiKey);
 
+// Assign JSON data from file to variable
+const data = require('../misc.json');
 
-
-//============= copy shipment JSON from admin and assign it to const ship ===============
-
-const ship = 
-
-//=========================================================================================================================
-
-
-// DELETES ALL THE UNESSCESARY ATTRIBUTES
-delete ship.to_address.id
-delete ship.to_address.mode
-delete ship.to_address.updated_at
-delete ship.to_address.created_at
-delete ship.to_address.carrier_facility
-delete ship.from_address.id
-delete ship.from_address.created_at
-delete ship.from_address.mode
-delete ship.from_address.updated_at
-delete ship.parcel.id
-delete ship.parcel.created_at
-delete ship.parcel.mode
-delete ship.parcel.updated_at
-
-// delete ship.return_address.id
-// delete ship.return_address.created_at
-// delete ship.return_address.mode
-// delete ship.return_address.updated_at
-
-if (ship.parcel.predefined_package === null) {
-  delete ship.parcel.predefined_package
-};
-
-if (ship.customs_info) {
-delete ship.customs_info.id
-delete ship.customs_info.created_at
-delete ship.customs_info.mode
-delete ship.customs_info.updated_at
-for (i = 0; i < ship.customs_info.customs_items.length; i++) {
-  delete ship.customs_info.customs_items[i].id
-  delete ship.customs_info.customs_items[i].created_at
-  delete ship.customs_info.customs_items[i].mode
-  delete ship.customs_info.customs_items[i].updated_at
-  if(ship.customs_info.customs_items[i].currency === null) {
-    delete ship.customs_info.customs_items[i].currency
-  }
- }
+// Get rid of all the things
+delete data.to_address.id;
+delete data.to_address.mode;
+delete data.to_address.updated_at;
+delete data.to_address.created_at;
+delete data.to_address.carrier_facility;
+delete data.from_address.id;
+delete data.from_address.created_at;
+delete data.from_address.mode;
+delete data.from_address.updated_at;
+delete data.parcel.id;
+delete data.parcel.created_at;
+delete data.parcel.mode;
+delete data.parcel.updated_at;
+if (data.parcel.predefined_package === null) {
+  delete data.parcel.predefined_package;
 }
+if (data.customs_info) {
+  delete data.customs_info.id;
+  delete data.customs_info.created_at;
+  delete data.customs_info.mode;
+  delete data.customs_info.updated_at;
+  for (let i = 0; i < data.customs_info.customs_items.length; i++) {
+    delete data.customs_info.customs_items[i].id;
+    delete data.customs_info.customs_items[i].created_at;
+    delete data.customs_info.customs_items[i].mode;
+    delete data.customs_info.customs_items[i].updated_at;
+    if (data.customs_info.customs_items[i].currency === null) {
+      delete data.customs_info.customs_items[i].currency;
+    }
 
+    // Convert shipment customs_items values from strings to numbers to get around prop type differences
+    // This is required for the EasyPost Node lib v5+, lib versions prior to this don't need this fix
+    if (data.customs_info.customs_items[i].value) {
+      data.customs_info.customs_items[i].value = Number(data.customs_info.customs_items[i].value);
+    }
+  }
+}
+delete data.batch_id;
+delete data.batch_message;
+delete data.batch_status;
 
-
+// Recreate the shipment
 const shipment = new api.Shipment({
-    to_address: ship.to_address,
-    from_address: ship.from_address,
-    // return_address: ship.return_address,
-    parcel: ship.parcel,
-    customs_info: ship.customs_info,
-    options: ship.options,
-    reference: 'Testing',
-    // is_return: true,
-    // service: 'ExpressEasyNonDoc',
-    // carrier_accounts: [process.env.UPS],
-    carrier_accounts: ['ca_7e670d6620c5402c954e31585d18027c'],
-})
+  to_address: data.to_address,
+  from_address: data.from_address,
+  parcel: data.parcel,
+  options: data.options,
+  customs_info: data.customs_info,
+  is_return: data.is_return,
+  carrier_accounts: [process.env.USPS],
+  options: {
+    // print_custom_1: 'Print Custom 1',
+    // print_custom_2: 'Print Custom 2'
+    // incoterm: "DDP",
+//     commercial_invoice_format: 'PNG',
+// label_size: "4x6"
+// suppress_etd: true
+  }
+});
 
-// shipment.save().then(console.log).catch(console.log);
-
-// shipment.save().then(s => {
-//   console.log(s.rates)
-//   console.log(s.messages);
-//   console.log(s.id);
-//   console.log(s.usps_zone);
-//   console.log(s.postage_label); // for one-call buys
-// }).catch(console.log);
-
+shipment.save().then(console.log).catch(console.log);
 
 //============buy shipment by lowest rate============
-shipment.save().then(s => {
-  s.buy(s.lowestRate()).then(console.log).catch(console.log);
- }).catch(console.log);
+// shipment
+//   .save()
+//   .then((s) => {
+//     s.buy(s.lowestRate())
+//       .then(console.log)
+//       .catch((error) => console.log(JSON.stringify(error, null, 2)));
+//   })
+//   .catch((error) => console.log(JSON.stringify(error, null, 2)));
 
 //============buy shipment by carrier name/service type============
-// shipment.save().then(buyShipment => {
-//   shipment.buy('FedEx', 'INTERNATIONAL_PRIORITY')
-//     .then(console.log).catch(console.log);
-// }).catch(console.log);
+// shipment.save().then(s =>
+//   s.buy(shipment.lowestRate(['Purolator'], ['PurolatorGround']))
+//     .then(console.log).catch(error => console.log(JSON.stringify(error, null, 2))))
+// ).catch(error => console.log(JSON.stringify(error, null, 2)));
 
 // ============buy shipment by ID============
-// api.Shipment.retrieve('shp_b5ec94762ff547db9b429b01e51ae3d0').then(s => {
-//   s.buy('rate_a8279fd72e604d34a55eec1d7f54b5d6').then(console.log).catch(console.log);
-// }).catch(console.log);
+// api.Shipment.retrieve('shp_17f069aa057742a09df076f207d08673').then(s => {
+//   s.buy('rate_e0acf12e45dc418587e61365646a7091').then(console.log).catch(error => console.log(JSON.stringify(error, null, 2)));
+// }).catch(error => console.log(JSON.stringify(error, null, 2)));

@@ -41,15 +41,15 @@ const fromAddress = new api.Address({
   phone: '4165555556',
   email: 'TEST123@YOPMAIL.COM',
 
-  company: 'THE TESTY MCTESTFACE CO.',
-  name: 'MR. TESTY MCTESTFACE',
-  street1: '721 Government St',
-  // street2: '',
-  city: 'Victoria',
-  state: 'BC',
-  zip: 'V8W 1W5',
-  country: 'CA',
-  phone: '6135699941',
+  // company: 'THE TESTY MCTESTFACE CO.',
+  // name: 'MR. TESTY MCTESTFACE',
+  // street1: '721 Government St',
+  // // street2: '',
+  // city: 'Victoria',
+  // state: 'BC',
+  // zip: 'V8W 1W5',
+  // country: 'CA',
+  // phone: '6135699941',
   // residential: false
 });
 
@@ -124,7 +124,7 @@ const shipment = new api.Shipment({
     //   },
     // ],
     // reference: '123',
-    // is_return: true,
+    is_return: true,
     // service: 'DHLPacketPlusInternational',
     options: {
     //  importer_address_id: 'adr_5919faf95aec43d4949215d07f913e16',
@@ -159,17 +159,17 @@ const shipment = new api.Shipment({
     //  },
     },
     // carrier_accounts: ['ca_c37dd0aa979646ad9b5e113a4743e61a'],
-    carrier_accounts: [process.env.UPS],
+    carrier_accounts: [process.env.FEDEX],
 });
 
 //SOME VARIOUS WAYS TO RETURN RESPONSE BODY INFO I'VE PLAYED AROUND WITH
 
-shipment.save().then(s => {
-  console.log(s.rates)
-  console.log(s.messages)
-  console.log(s.id);
+// shipment.save().then(s => {
+//   console.log(s.rates)
+//   console.log(s.messages)
+//   console.log(s.id);
   // console.log(s.postage_label); // for one-call buys
-}).catch(console.log);
+// }).catch(console.log);
 
 
 // shipment.save().then(s => {
@@ -181,11 +181,18 @@ shipment.save().then(s => {
 
 
 
-// shipment.save().then(s => {
-//   for(i = 0; i < s.rates.length; i++) {
-//     console.log(s.rates[i].service + " " + "$" + s.rates[i].rate)
+// shipment.save().then((s) => {
+//   for (i = 0; i < s.rates.length; i++) {
+//     console.log(
+//       s.rates[i].carrier +
+//         " " +
+//         s.rates[i].service +
+//         " " +
+//         "$" +
+//         s.rates[i].rate
+//     );
 //   }
-// })
+// });
 
 
 // shipment.save().then(s => {

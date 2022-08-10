@@ -22,16 +22,18 @@ const api = new Easypost(apiKey);
 //     phone: '5481855189',
 // });
 
-const address = 'adr_811893dfaee04090b2630cd34ca74860'
-const shipment = 'shp_185786ef365b4ad182674af82952d411';
+
+const address = 'adr_aa8be464189e11edbf06ac1f6bc7b362'
+const shipment = 'shp_8072c5ea9e864570a7a1baf18b158478';
 
 const pickup = new api.Pickup({
     address,
     shipment,
+    carrier_account: process.env.FEDEX,
     reference: 'Pickup Testing',
-    min_datetime: '2021-09-20 08:00:00',
-    max_datetime: '2021-09-20 12:00:00',
-    is_account_address: false,
+    min_datetime: '2022-08-10 04:22:00',
+    max_datetime: '2022-08-11 23:59:59',
+    // is_account_address: false,
     instructions: 'This is a test',
 });
 
