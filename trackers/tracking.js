@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-const apiKey = process.env.testKey;
-// const apiKey = process.env.prodKey;
+// const apiKey = process.env.testKey;
+const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 // const trackArray = [
@@ -19,8 +19,8 @@ const api = new Easypost(apiKey);
 
 const tracker1 = new api.Tracker({
   // tracking_code: trackArray[1],
-  tracking_code: 'EZ2000000002',
-  carrier: "UPS",
+  tracking_code: '522221325173',
+  carrier: "FedEx",
 });
 
 tracker1.save().then(console.log).catch(console.log);

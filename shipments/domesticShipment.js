@@ -104,6 +104,7 @@ const shipment = new api.Shipment({
   // is_return: true,
   // ancillary_endorsement: true,
   options: {
+    // carbon_offset: true,
     // hazmat: 'LIMITED_QUANTITY',
     // additional_handling: true,
     // label_date: '2020-05-29',
@@ -135,7 +136,7 @@ const shipment = new api.Shipment({
     //   country: 'US'
     // }
   },
-  carrier_accounts: [process.env.FEDEX],
+  carrier_accounts: [process.env.USPS],
   // carrier_accounts: ['ca_51c5e89603c64c04b4ed3d55a3547c8a']
 });
 
@@ -156,7 +157,7 @@ const shipment = new api.Shipment({
 //   })
 // }).catch(console.log);
 
-shipment.save().then((s) => {
+shipment.save(true).then((s) => {
   for (i = 0; i < s.rates.length; i++) {
     console.log(
       s.rates[i].carrier +
@@ -179,17 +180,17 @@ shipment.save().then((s) => {
 // shipment.save().then(console.log).catch(console.log);
 
 //============buy shipment by lowest rate============
-shipment
-  .save()
-  .then((s) => {
-    s.buy(s.lowestRate()).then(console.log).catch(console.log);
-  })
-  .catch(console.log);
+// shipment
+//   .save()
+//   .then((s) => {
+//     s.buy(s.lowestRate()).then(console.log).catch(console.log);
+//   })
+//   .catch(console.log);
 
 // ============Buy Shipment by ID============
-// api.Shipment.retrieve("shp_c5110c1e8a244a4fb4910b9104dd2770")
+// api.Shipment.retrieve("shp_eaf06740634f4e67956f17f1a6673ff5")
 //   .then((s) => {
-//     s.buy("rate_2f6cb312577b40c7b765cec66b65014c")
+//     s.buy("rate_665970ba85db4c29a8693b5223e910be")
 //       .then(console.log)
 //       .catch(console.log);
 //   })

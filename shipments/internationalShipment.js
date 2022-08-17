@@ -124,7 +124,7 @@ const shipment = new api.Shipment({
     //   },
     // ],
     // reference: '123',
-    is_return: true,
+    // is_return: true,
     // service: 'DHLPacketPlusInternational',
     options: {
     //  importer_address_id: 'adr_5919faf95aec43d4949215d07f913e16',
@@ -159,7 +159,7 @@ const shipment = new api.Shipment({
     //  },
     },
     // carrier_accounts: ['ca_c37dd0aa979646ad9b5e113a4743e61a'],
-    carrier_accounts: [process.env.FEDEX],
+    carrier_accounts: [process.env.USPS],
 });
 
 //SOME VARIOUS WAYS TO RETURN RESPONSE BODY INFO I'VE PLAYED AROUND WITH
@@ -181,18 +181,18 @@ const shipment = new api.Shipment({
 
 
 
-// shipment.save().then((s) => {
-//   for (i = 0; i < s.rates.length; i++) {
-//     console.log(
-//       s.rates[i].carrier +
-//         " " +
-//         s.rates[i].service +
-//         " " +
-//         "$" +
-//         s.rates[i].rate
-//     );
-//   }
-// });
+shipment.save().then((s) => {
+  for (i = 0; i < s.rates.length; i++) {
+    console.log(
+      s.rates[i].carrier +
+        " " +
+        s.rates[i].service +
+        " " +
+        "$" +
+        s.rates[i].rate
+    );
+  }
+});
 
 
 // shipment.save().then(s => {
@@ -215,6 +215,6 @@ const shipment = new api.Shipment({
 
 
 // ============buy shipment by lowest rate============
-// shipment.save().then(s => {
-//   s.buy(s.lowestRate()).then(console.log).catch(console.log);
-//  }).catch(console.log);
+shipment.save().then(s => {
+  s.buy(s.lowestRate()).then(console.log).catch(console.log);
+ }).catch(console.log);

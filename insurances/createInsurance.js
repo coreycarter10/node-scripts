@@ -7,16 +7,40 @@ const api = new Easypost(apiKey);
 
 /* Either objects or ids can be passed in. If the object does
  * not have an id, it will be created. */
-// const toAddress = new api.Address({ ... })
-// const fromAddress = new api.Address({ ... })
+const toAddress = new api.Address({
+  // company: "StoreMcStoreFace",
+    name: 'Corey Carter',
+    street1: '37620 N Poplar road',
+    // street2: 'STE B',
+    city: 'San Tan Valley',
+    state: 'AZ',
+    zip: '85140',
+    country: 'US',
+    phone: '8013761006',
+    email: 'ccarter@easypost.com',
+})
+const fromAddress = new api.Address({
+  // company: "StoreMcStoreFace",
+  name: 'Deanna Carter',
+  street1: '75 W Center Str',
+  // street2: 'STE B',
+  city: 'Provo',
+  state: 'UT',
+  zip: '84601',
+  country: 'US',
+  phone: '8013761006',
+  email: 'ccarter@easypost.com',
+})
 
 const insurance = new api.Insurance({
-  to_address: "adr_c02f249412a911eda2acac1f6bc72124",
-  from_address: "adr_c04b3a9f12a911edb725ac1f6b0a0d1e",
-  tracking_code: "EZ1000000001",
+  // to_address: "adr_...",
+  // from_address: "adr_...",
+  to_address: toAddress,
+  from_address: fromAddress,
+  tracking_code: "522221325173",
   carrier: "FedEx",
-  amount: "123.45",
-  reference: "1234567",
+  amount: "210.00",
+  reference: "Kaylas glasses",
 });
 
 insurance.save().then(console.log).catch(console.log);
