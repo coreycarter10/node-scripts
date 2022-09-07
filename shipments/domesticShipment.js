@@ -9,10 +9,10 @@ const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
   verify: ["delivery", "zip4"],
-  company: "Swing Away Golf Studio",
+  company: "Impact Custom Clubs",
   name: "Brandon Kida",
   street1: "2258 Caminito Pescado #12",
-  // street2: '',
+  // street2: "Suite 105",
   city: "San Diego",
   state: "CA",
   zip: "92107",
@@ -20,16 +20,16 @@ const toAddress = new api.Address({
   phone: "8015401281",
   email: "kidakat15@gmail.com",
 
-  // name: 'Bob',
-  // street1: '820 E Newfield Dr',
-  // street2: '',
-  // city: 'Sandy',
-  // state: 'UT',
-  // zip: '84094',
-  // country: 'US',
-  // phone: '8014555555',
-  // email: 'TEST123@YOPMAIL.COM',
-  // residential: true
+  // name: "Corey Carter",
+  // street1: "37620 N Poplar road",
+  // // street2: '',
+  // city: "San Tan Valley",
+  // state: "AZ",
+  // zip: "85140",
+  // country: "US",
+  // phone: "8013761006",
+  // email: "swingawaygolfstudio@gmail.com",
+  // residential: false,
 });
 
 const fromAddress = new api.Address({
@@ -44,30 +44,30 @@ const fromAddress = new api.Address({
   phone: "8013761006",
   email: "ccarter@easypost.com",
 
-  //  company: 'EasyPost',
-  //  name: 'Mr. EP',
-  //  street1: '345 California St',
-  //  street2: 'FL 10',
-  //  city: 'San Francisco',
-  //  state: 'CA',
-  //  zip: '94104',
-  //  country: 'US',
-  //  phone: '8012220000',
-  //  email: 'email@email.com',
+  // company: "Swing Away Golf Studio",
+  // name: "Brandon Kida",
+  // street1: "2258 Caminito Pescado #12",
+  // // street2: '',
+  // city: "San Diego",
+  // state: "CA",
+  // zip: "92107",
+  // country: "US",
+  // phone: "8015401281",
+  // email: "kidakat15@gmail.com",
 });
 
-const returnAddress = new api.Address({
-  company: "EasyPost",
-  name: "Corey Carter",
-  street1: "37620 N Poplar road",
-  // street2: "STE B",
-  city: "San Tan Valley",
-  state: "AZ",
-  zip: "85140",
-  country: "US",
-  phone: "8013761006",
-  email: "ccarter@easypost.com",
-});
+// const returnAddress = new api.Address({
+//   company: "EasyPost",
+//   name: "Corey Carter",
+//   street1: "37620 N Poplar road",
+//   // street2: "STE B",
+//   city: "San Tan Valley",
+//   state: "AZ",
+//   zip: "85140",
+//   country: "US",
+//   phone: "8013761006",
+//   email: "ccarter@easypost.com",
+// });
 
 // fromAddress.save().then(console.log).catch(console.log);
 // toAddress.save().then(console.log).catch(console.log);
@@ -96,7 +96,7 @@ const parcel = new api.Parcel({
 const shipment = new api.Shipment({
   to_address: toAddress,
   from_address: fromAddress,
-  return_address: returnAddress,
+  return_address: fromAddress,
   parcel: parcel,
   // carrier: 'USPS',
   // service: 'First',
@@ -104,7 +104,6 @@ const shipment = new api.Shipment({
   // is_return: true,
   // ancillary_endorsement: true,
   options: {
-    // carbon_offset: true,
     // hazmat: 'LIMITED_QUANTITY',
     // additional_handling: true,
     // label_date: '2020-05-29',
@@ -136,7 +135,7 @@ const shipment = new api.Shipment({
     //   country: 'US'
     // }
   },
-  carrier_accounts: [process.env.USPS],
+  // carrier_accounts: [process.env.USPS],
   // carrier_accounts: ['ca_51c5e89603c64c04b4ed3d55a3547c8a']
 });
 
@@ -157,7 +156,7 @@ const shipment = new api.Shipment({
 //   })
 // }).catch(console.log);
 
-shipment.save(true).then((s) => {
+shipment.save().then((s) => {
   for (i = 0; i < s.rates.length; i++) {
     console.log(
       s.rates[i].carrier +
@@ -170,7 +169,12 @@ shipment.save(true).then((s) => {
   }
 });
 
-// shipment.save().then(s => {
+// Carbon Offset log rates
+// shipment.save(true).then((s) => {
+//   console.log(s.rates);
+// });
+
+// shipment.save(true).then(s => {
 //   console.log(s.rates[0].service);
 //   console.log(s.rates[0].carrier);
 //   console.log(s.rates[0].rate);
@@ -187,10 +191,19 @@ shipment.save(true).then((s) => {
 //   })
 //   .catch(console.log);
 
-// ============Buy Shipment by ID============
-// api.Shipment.retrieve("shp_eaf06740634f4e67956f17f1a6673ff5")
+// Buy Shipment by ID & rate
+// api.Shipment.retrieve("shp_f1ce5c4a1f1048c38bc429d837231f92")
 //   .then((s) => {
-//     s.buy("rate_665970ba85db4c29a8693b5223e910be")
+//     s.buy("rate_0e9026e59a4a4e4cb79b623b7462135d")
+//       .then(console.log)
+//       .catch(console.log);
+//   })
+//   .catch(console.log);
+
+// ============Carbon offset Buy Shipment by ID============
+// api.Shipment.retrieve("shp_dff0d619604043ec8f5cd04858e29bbc")
+//   .then((s) => {
+//     s.buy("rate_85e33a310863452e85dff5eb5685922d", null, true)
 //       .then(console.log)
 //       .catch(console.log);
 //   })
@@ -200,6 +213,6 @@ shipment.save(true).then((s) => {
 // shipment
 //   .save()
 //   .then((buyShipment) => {
-//     shipment.buy("UPS", "Ground").then(console.log).catch(console.log);
+//     shipment.buy("FedEx", "Ground").then(console.log).catch(console.log);
 //   })
 //   .catch(console.log);

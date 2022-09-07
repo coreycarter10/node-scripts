@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
@@ -8,7 +8,7 @@ const apiKey = process.env.testKey;
 const api = new Easypost(apiKey);
 
 // Assign JSON data from file to variable
-const data = require('../misc.json');
+const data = require("../misc.json");
 
 // Get rid of all the things
 delete data.to_address.id;
@@ -44,7 +44,9 @@ if (data.customs_info) {
     // Convert shipment customs_items values from strings to numbers to get around prop type differences
     // This is required for the EasyPost Node lib v5+, lib versions prior to this don't need this fix
     if (data.customs_info.customs_items[i].value) {
-      data.customs_info.customs_items[i].value = Number(data.customs_info.customs_items[i].value);
+      data.customs_info.customs_items[i].value = Number(
+        data.customs_info.customs_items[i].value
+      );
     }
   }
 }
@@ -60,15 +62,16 @@ const shipment = new api.Shipment({
   options: data.options,
   customs_info: data.customs_info,
   is_return: data.is_return,
-  carrier_accounts: [process.env.USPS],
+  carrier_accounts: [process.env.DHLEXPRESS],
   options: {
     // print_custom_1: 'Print Custom 1',
     // print_custom_2: 'Print Custom 2'
     // incoterm: "DDP",
-//     commercial_invoice_format: 'PNG',
-// label_size: "4x6"
-// suppress_etd: true
-  }
+    // commercial_invoice_format: "PNG",
+    // label_size: "4x6"
+    // suppress_etd: true,
+    // bill_third_party_account: 7308941,
+  },
 });
 
 shipment.save().then(console.log).catch(console.log);
@@ -90,6 +93,10 @@ shipment.save().then(console.log).catch(console.log);
 // ).catch(error => console.log(JSON.stringify(error, null, 2)));
 
 // ============buy shipment by ID============
-// api.Shipment.retrieve('shp_17f069aa057742a09df076f207d08673').then(s => {
-//   s.buy('rate_e0acf12e45dc418587e61365646a7091').then(console.log).catch(error => console.log(JSON.stringify(error, null, 2)));
-// }).catch(error => console.log(JSON.stringify(error, null, 2)));
+// api.Shipment.retrieve("shp_e73ce0c4f2e440e78e050b7603820218")
+//   .then((s) => {
+//     s.buy("rate_095f2f80bb584808b6f5e9c4534a020c")
+//       .then(console.log)
+//       .catch((error) => console.log(JSON.stringify(error, null, 2)));
+//   })
+//   .catch((error) => console.log(JSON.stringify(error, null, 2)));

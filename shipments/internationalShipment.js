@@ -1,24 +1,21 @@
-require('dotenv').config();
+require("dotenv").config();
 
-
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
-
-
-  const toAddress = new api.Address({
-  company: 'THE TESTY MCTESTFACE CO.',
-  name: 'MR. TESTY MCTESTFACE',
-  street1: '721 Government St',
+const toAddress = new api.Address({
+  company: "THE TESTY MCTESTFACE CO.",
+  name: "MR. TESTY MCTESTFACE",
+  street1: "721 Government St",
   // street2: '',
-  city: 'Victoria',
-  state: 'BC',
-  zip: 'V8W 1W5',
-  country: 'CA',
-  phone: '6135699941',
-  
+  city: "Victoria",
+  state: "BC",
+  zip: "V8W 1W5",
+  country: "CA",
+  phone: "6135699941",
+
   // name: 'Monica Gustafson',
   // street1: 'Unit 8000 Box 5091',
   // city: 'DPO',
@@ -31,105 +28,104 @@ const api = new Easypost(apiKey);
 
 const fromAddress = new api.Address({
   company: "THE TESTING CO.",
-  name: 'MR. TEST',
-  street1: '358 S 700 E',
-  street2: 'STE B',
-  city: 'Salt Lake City',
-  state: 'UT',
-  zip: '84102',
-  country: 'US',
-  phone: '4165555556',
-  email: 'TEST123@YOPMAIL.COM',
+  name: "MR. TEST",
+  street1: "358 S 700 E",
+  street2: "STE B",
+  city: "Salt Lake City",
+  state: "UT",
+  zip: "84102",
+  country: "US",
+  phone: "4165555556",
+  email: "TEST123@YOPMAIL.COM",
 
-  // company: 'THE TESTY MCTESTFACE CO.',
-  // name: 'MR. TESTY MCTESTFACE',
-  // street1: '721 Government St',
-  // // street2: '',
-  // city: 'Victoria',
-  // state: 'BC',
-  // zip: 'V8W 1W5',
-  // country: 'CA',
-  // phone: '6135699941',
+  // street1: "500 Cooper Avenue",
+  // city: "Johnstown",
+  // state: "PA",
+  // zip: "15906",
+  // country: "US",
+  // phone: "8143176686",
+  // email: "test123@yopmail.com",
+
   // residential: false
 });
-
 
 // fromAddress.save().then(console.log).catch(console.log);
 
 // toAddress.save().then(console.log).catch(console.log);
 
 const customsInfo = new api.CustomsInfo({
-    eel_pfc: "NOEEI 30.37(a)",
-    customs_certify: true,
-    customs_signer: 'The Man',
-    contents_type: 'other',
-    restriction_type: 'none',
-    restriction_comments: 'Tesing UPS stuff and things',
-    // non_delivery_option: 'return',
-    contents_explanation: 'Some stuff',
-    declaration: 'I do declare',
-    customs_items: [
-        new api.CustomsItem({
-            description: 'Sample good',
-            quantity: 1,
-            weight: 9,
-            value: 25.,
-            hs_tariff_number: '4901.99',
-            origin_country: 'US',
-            code: 'MPH0213',
-            // currency: 'USD'
-        }),
+  eel_pfc: "NOEEI 30.37(a)",
+  customs_certify: true,
+  customs_signer: "The Man",
+  contents_type: "other",
+  restriction_type: "none",
+  restriction_comments: "Tesing UPS stuff and things",
+  // non_delivery_option: 'return',
+  contents_explanation: "Some stuff",
+  declaration: "I do declare",
+  customs_items: [
+    new api.CustomsItem({
+      description: "Sample good",
+      quantity: 1,
+      weight: 9,
+      value: 2500,
+      hs_tariff_number: "4901.99",
+      origin_country: "US",
+      code: "MPH0213",
+      // currency: 'USD'
+    }),
 
-  //     new api.CustomsItem({
-  //       description: 'Notecard_12019_Cadolia',
-  //       quantity: 280,
-  //       weight:0.06,
-  //       value: 1.0,
-  //       origin_country: 'US',
-  //       code: 'Notecard_12019',
-  //   }),
+    //     new api.CustomsItem({
+    //       description: 'Notecard_12019_Cadolia',
+    //       quantity: 280,
+    //       weight:0.06,
+    //       value: 1.0,
+    //       origin_country: 'US',
+    //       code: 'Notecard_12019',
+    //   }),
 
-  //   new api.CustomsItem({
-  //     description: 'Cadolia_Labels',
-  //     quantity: 240,
-  //     weight: 0.06,
-  //     value: 1.0,
-  //     origin_country: 'US',
-  //     code: 'MPH0213',
-  // }),
-      ],
+    //   new api.CustomsItem({
+    //     description: 'Cadolia_Labels',
+    //     quantity: 240,
+    //     weight: 0.06,
+    //     value: 1.0,
+    //     origin_country: 'US',
+    //     code: 'MPH0213',
+    // }),
+  ],
 });
 
 const parcel = new api.Parcel({
-    // predefined_package: 'Satchel',
-    length: 14,
-    width: 7,
-    height: 10,
-    weight: 32.0,
+  // predefined_package: 'Satchel',
+  length: 14,
+  width: 7,
+  height: 10,
+  weight: 32.0,
 });
 
 // parcel.save().then(console.log).catch(console.log);
 
 const shipment = new api.Shipment({
-    to_address: toAddress,
-    from_address: fromAddress,
-    parcel: parcel,
-    customs_info: customsInfo,
-    // tax_identifiers: [
-    //   {
-    //     entity: "SENDER",
-    //     tax_id: "IM2760000742",
-    //     tax_id_type: "IOSS",
-    //     issuing_country: "US"
-    //   },
-    // ],
-    // reference: '123',
-    // is_return: true,
-    // service: 'DHLPacketPlusInternational',
-    options: {
+  to_address: toAddress,
+  from_address: fromAddress,
+  parcel: parcel,
+  customs_info: customsInfo,
+  // tax_identifiers: [
+  //   {
+  //     entity: "SENDER",
+  //     tax_id: "IM2760000742",
+  //     tax_id_type: "IOSS",
+  //     issuing_country: "US"
+  //   },
+  // ],
+  // reference: '123',
+  // is_return: true,
+  // service: 'DHLPacketPlusInternational',
+  options: {
+    // carrier_insurance_amount: 10,
     //  importer_address_id: 'adr_5919faf95aec43d4949215d07f913e16',
     //  bill_third_party_account: '12345',
-    //  incoterm: 'DAP',
+    // incoterm: "DAP",
     //  import_federal_tax_id: 'IM2760000742',
     //  duty_payment_account: '654410658',
     //  machineable: true,
@@ -157,9 +153,9 @@ const shipment = new api.Shipment({
     //    postal_code: '12345',
     //    country: 'US'
     //  },
-    },
-    // carrier_accounts: ['ca_c37dd0aa979646ad9b5e113a4743e61a'],
-    carrier_accounts: [process.env.USPS],
+  },
+  // carrier_accounts: ['ca_c37dd0aa979646ad9b5e113a4743e61a'],
+  carrier_accounts: [process.env.DHLEXPRESSBYDEFAULT],
 });
 
 //SOME VARIOUS WAYS TO RETURN RESPONSE BODY INFO I'VE PLAYED AROUND WITH
@@ -168,18 +164,15 @@ const shipment = new api.Shipment({
 //   console.log(s.rates)
 //   console.log(s.messages)
 //   console.log(s.id);
-  // console.log(s.postage_label); // for one-call buys
+// console.log(s.postage_label); // for one-call buys
 // }).catch(console.log);
-
 
 // shipment.save().then(s => {
 //   s.rates.forEach(x => {
 //     const theGoods = x.service + " " + "$" + x.rate
 //     console.log(theGoods);
-//   }) 
+//   })
 // }).catch(console.log);
-
-
 
 shipment.save().then((s) => {
   for (i = 0; i < s.rates.length; i++) {
@@ -194,7 +187,6 @@ shipment.save().then((s) => {
   }
 });
 
-
 // shipment.save().then(s => {
 //   console.log(s.rates[0].service);
 //   console.log(s.rates[0].carrier);
@@ -202,19 +194,17 @@ shipment.save().then((s) => {
 //   console.log(s.rates[0].delivery_days);
 // }).catch(console.log);
 
-
-
 // shipment.save().then(console.log).catch(console.log);
-
-
 
 // ============buy shipment by ID============
 // api.Shipment.retrieve('shp_9687957fb3934de283c9dc447ca576c7').then(s => {
 //   s.buy('rate_7c6eda5da6be40dda5abe0c7a8c2371b').then(console.log).catch(console.log);
 // }).catch(console.log);
 
-
 // ============buy shipment by lowest rate============
-shipment.save().then(s => {
-  s.buy(s.lowestRate()).then(console.log).catch(console.log);
- }).catch(console.log);
+// shipment
+//   .save()
+//   .then((s) => {
+//     s.buy(s.lowestRate()).then(console.log).catch(console.log);
+//   })
+//   .catch(console.log);

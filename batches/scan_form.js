@@ -1,14 +1,12 @@
-require('dotenv').config();
+require("dotenv").config();
 
-
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
-
 const scanForm = new api.ScanForm({
-  shipments: ['shp_4ed0a1dcf0144808819c3831794b987a']
+  shipments: ["shp_346a8d222af24af0861db3e52a3631ae"],
 });
 
 scanForm.save().then(console.log).catch(console.log);

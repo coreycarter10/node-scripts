@@ -1,7 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 
-
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 // const apiKey = process.env.testKey;
 const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
@@ -9,7 +8,7 @@ const api = new Easypost(apiKey);
 ///////////////////////////ADD SHIPMENTS TO A BATCH////////////////////////////////////////////////////////////////
 
 batch = new api.Batch({
-    shipments: ['shp_baef77f0487a476c9f90b28a4ba96e06'],
+  shipments: ["shp_3a8c5886d29a4a8da36ba6184c798eb9"],
 });
 
 batch.save().then(console.log).catch(console.log);
@@ -21,7 +20,6 @@ batch.save().then(console.log).catch(console.log);
 //   });
 
 // batch.save().then(console.log).catch(console.log);
-
 
 ///////////////////RETRIEVE A BATCH AND SCANFORM/////////////////////////////////////////////////////////////////////////////////
 
