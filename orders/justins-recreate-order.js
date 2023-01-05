@@ -1,15 +1,14 @@
 require("dotenv").config();
 const Easypost = require("@easypost/api");
 
-const apiKey = process.env.prodKey; // prodKey
-// const apiKey = process.env.testKey; // testKey
+// const apiKey = process.env.prodKey; // prodKey
+const apiKey = process.env.testKey; // testKey
 
 /* define api key */
 const api = new Easypost(apiKey);
 
 // bring in the data from the misc.json file
 const data = require("../misc.json");
-
 
 // Delete order address data
 delete data.to_address.id;
@@ -78,18 +77,57 @@ for (let i = 0; i < data.shipments.length; i++) {
 // data.to_address.federal_tax_id = 'IE123456789000'
 // data.from_address.federal_tax_id = 'GB123456789000'
 
+// const customs_info = {
+//   eel_pfc: "NOEEI 30.37(a)",
+//   customs_certify: true,
+//   customs_signer: "Tim Peterson",
+//   contents_type: "other",
+//   restriction_type: "none",
+//   restriction_comments: "",
+//   non_delivery_option: "return",
+//   contents_explanation: "Nutritional Supplements",
+//   // declaration: '',
+//   customs_items: [
+//     new api.CustomsItem({
+//       description: "MusclePharm Combat XL Mass Gainer - 12lbs Vanilla",
+//       quantity: 1,
+//       weight: 192,
+//       value: 47.99,
+//       // 'hs_tariff_number': '852352',
+//       origin_country: "US",
+//       code: "MPH0213",
+//     }),
+//   ],
+// };
+
 // Recreate the order
 const order = new api.Order({
   to_address: data.to_address,
   from_address: data.from_address,
   shipments: data.shipments,
   options: data.options,
-  carrier_accounts: [{ id: process.env.FEDEX }],
+  customs_info: data.customs_info,
+  // customs_info: customs_info,
+  carrier_accounts: [{ id: process.env.PUROLATOR }],
 });
 
-order
-  .save()
-  .then(console.log)
-  .catch((error) => {
-    console.log(JSON.stringify(error));
-  });
+// order
+//   .save()
+//   .then(console.log)
+//   .catch((error) => {
+//     console.log(JSON.stringify(error));
+//   });
+
+order.save().then((s) => {
+  for (i = 0; i < s.rates.length; i++) {
+    console.log(
+      s.rates[i].carrier +
+        " " +
+        s.rates[i].service +
+        " " +
+        "$" +
+        s.rates[i].rate
+    );
+  }
+  console.log(order.id);
+});

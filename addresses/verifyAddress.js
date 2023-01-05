@@ -18,14 +18,15 @@ const verifiableAddress = new api.Address({
   // country: "US",
   // phone: "8015401281",
   // email: "ccarter@easypost.com",
-  street1: "2880 ZILLINSKY ROAD",
+  name: "Mr. EP",
+  street1: "500 Edgemont Road",
   // street2: "",
-  city: "Powell River",
-  state: "BC",
-  zip: "V8A 0P7",
-  country: "CA",
-  phone: "6042236185",
-  email: "MAARTEN.STAM@YAHOO.NL",
+  city: "Charlottesville",
+  state: "VA",
+  zip: "22903",
+  country: "US",
+  // phone: "6042236185",
+  // email: "MAARTEN.STAM@YAHOO.NL",
 });
 
 // 53 broad meadow rd, Colchester, CT 06415

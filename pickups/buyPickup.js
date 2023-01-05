@@ -1,22 +1,20 @@
-require('dotenv').config();
+require("dotenv").config();
 
-
-const Easypost = require('@easypost/api');
+const Easypost = require("@easypost/api");
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
-
-
 
 // retrieve pickup
 // api.Pickup.retrieve('pickup_').then(console.log);
 
 // retrieve and buy pickup
-// api.Pickup.retrieve('pickup_04bbd273a33840fda6a76768749140ad').then(p => {
-//     p.buy('FedEx', 'Future-day Ground Pickup').then(console.log).catch(console.log);
-//   }).catch(console.log);
+// api.Pickup.retrieve("pickup_2b952a5eb5f749459d8aaa2280003ea0")
+//   .then((p) => {
+//     p.buy("CanadaPost", "OnDemand").then(console.log).catch(console.log);
+//   })
+//   .catch(console.log);
 
-
-  api.Pickup.retrieve('pickup_e841b1e70d6042e4aff1a64998382972').then(p => {
-    p.cancel().catch(console.error);
-  });
+// api.Pickup.retrieve("pickup_2b952a5eb5f749459d8aaa2280003ea0").then((p) => {
+//   p.cancel().catch(console.error);
+// });

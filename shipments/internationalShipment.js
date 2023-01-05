@@ -6,8 +6,8 @@ const apiKey = process.env.testKey;
 const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
-  company: "THE TESTY MCTESTFACE CO.",
-  name: "MR. TESTY MCTESTFACE",
+  // company: "THE TESTY MCTESTFACE CO.",
+  name: "Test user",
   street1: "721 Government St",
   // street2: '',
   city: "Victoria",
@@ -27,7 +27,7 @@ const toAddress = new api.Address({
 });
 
 const fromAddress = new api.Address({
-  company: "THE TESTING CO.",
+  // company: "THE TESTING CO.",
   name: "MR. TEST",
   street1: "358 S 700 E",
   street2: "STE B",
@@ -59,7 +59,7 @@ const customsInfo = new api.CustomsInfo({
   customs_signer: "The Man",
   contents_type: "other",
   restriction_type: "none",
-  restriction_comments: "Tesing UPS stuff and things",
+  restriction_comments: "Tesing ePostGlobal stuff and things",
   // non_delivery_option: 'return',
   contents_explanation: "Some stuff",
   declaration: "I do declare",
@@ -115,13 +115,16 @@ const shipment = new api.Shipment({
   //     entity: "SENDER",
   //     tax_id: "IM2760000742",
   //     tax_id_type: "IOSS",
-  //     issuing_country: "US"
+  //     issuing_country: "US",
   //   },
   // ],
   // reference: '123',
   // is_return: true,
   // service: 'DHLPacketPlusInternational',
   options: {
+    // suppress_etd: true,
+    // import_federal_tax_id: "1234",
+    // tax_id_expiration_date: "2022-12-31",
     // carrier_insurance_amount: 10,
     //  importer_address_id: 'adr_5919faf95aec43d4949215d07f913e16',
     //  bill_third_party_account: '12345',
@@ -129,7 +132,8 @@ const shipment = new api.Shipment({
     //  import_federal_tax_id: 'IM2760000742',
     //  duty_payment_account: '654410658',
     //  machineable: true,
-    //  commercial_invoice_format: 'PNG',
+    commercial_invoice_format: "PNG",
+    commercial_invoice_size: "4x6",
     //  freight_charge: 56.72,
     //  label_size: '4X6',
     //  label_format: "PDF",
@@ -155,7 +159,7 @@ const shipment = new api.Shipment({
     //  },
   },
   // carrier_accounts: ['ca_c37dd0aa979646ad9b5e113a4743e61a'],
-  carrier_accounts: [process.env.DHLEXPRESSBYDEFAULT],
+  carrier_accounts: [process.env.UPS],
 });
 
 //SOME VARIOUS WAYS TO RETURN RESPONSE BODY INFO I'VE PLAYED AROUND WITH
@@ -185,6 +189,7 @@ shipment.save().then((s) => {
         s.rates[i].rate
     );
   }
+  console.log(s.id);
 });
 
 // shipment.save().then(s => {
@@ -197,14 +202,18 @@ shipment.save().then((s) => {
 // shipment.save().then(console.log).catch(console.log);
 
 // ============buy shipment by ID============
-// api.Shipment.retrieve('shp_9687957fb3934de283c9dc447ca576c7').then(s => {
-//   s.buy('rate_7c6eda5da6be40dda5abe0c7a8c2371b').then(console.log).catch(console.log);
-// }).catch(console.log);
-
-// ============buy shipment by lowest rate============
-// shipment
-//   .save()
+// api.Shipment.retrieve("shp_edc9c674873f461180cfb820c5f2977e")
 //   .then((s) => {
-//     s.buy(s.lowestRate()).then(console.log).catch(console.log);
+//     s.buy("rate_0059f47e2cc543d58c65c54d98f3b0b0")
+//       .then(console.log)
+//       .catch(console.log);
 //   })
 //   .catch(console.log);
+
+// ============buy shipment by lowest rate============
+shipment
+  .save()
+  .then((s) => {
+    s.buy(s.lowestRate()).then(console.log).catch(console.log);
+  })
+  .catch(console.log);

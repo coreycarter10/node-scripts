@@ -54,27 +54,102 @@ delete data.batch_id;
 delete data.batch_message;
 delete data.batch_status;
 
+// const buyerAddress = new api.Address({
+//   name: "Test user",
+//   // company: "EasyPost",
+//   street1: "CTC: MACARENA GANZABAL",
+//   street2: "1350 NW 121ST AVE",
+//   city: "MIAMI",
+//   state: "FL",
+//   zip: "33182",
+//   country: "US",
+//   phone: "34234234",
+//   email: "",
+// });
+
 // Recreate the shipment
 const shipment = new api.Shipment({
   to_address: data.to_address,
+  // to_address: { id: "adr_9f04c7d34e2d11ed8e82ac1f6bc72124" },
   from_address: data.from_address,
+  // from_address: { id: "adr_ceb6b3ae7fc711ed8d2fac1f6bc7b362" },
+  // buyer_address: buyerAddress,
   parcel: data.parcel,
-  options: data.options,
+  // options: data.options,
   customs_info: data.customs_info,
   is_return: data.is_return,
-  carrier_accounts: [process.env.DHLEXPRESS],
+  reference: data.reference,
+  carrier_accounts: [process.env.USPS],
+  // tax_identifiers: [
+  //   {
+  //     entity: "SENDER",
+  //     tax_id: "GB123456789",
+  //     tax_id_type: "IOSS",
+  //     issuing_country: "GB",
+  //   },
+  //   {
+  //     entity: "RECEIVER",
+  //     tax_id: "GB123456789",
+  //     tax_id_type: "VAT",
+  //     issuing_country: "NL",
+  //   },
+  // ],
+  // import_federal_tax_id: "1234",
+  // tax_expiration_date: "2022-10-31"
   options: {
-    // print_custom_1: 'Print Custom 1',
-    // print_custom_2: 'Print Custom 2'
-    // incoterm: "DDP",
+    // print_custom: [
+    //   {
+    //     name: "RMA",
+    //     value: "JSXSKL",
+    //     barcode: "true",
+    //   },
+    //   {
+    //     value: "R",
+    //   },
+    // ],
+    // print_custom_1_barcode: true,
+    // print_custom_1_code: "RMA",
+    // delivery_confirmation: "SIGNATURE",
+    // special_rates_eligibility: "HERMES.NEXTDAY",
+    // label_format: "PDF",
+    // label_size: "4x6",
+    // label_date: "2023-01-4 10:30 AM",
     // commercial_invoice_format: "PNG",
-    // label_size: "4x6"
+    // commercial_invoice_size: "4x6",
+    // carrier_insurance_amount: "29.98",
+    // commercial_invoice_signature: "IMAGE_2",
+    // commercial_invoice_letterhead: "IMAGE_1",
+    // hazmat: "SECONDARY_CONTAINED",
+    // invoice_number: "RBY200399",
+    // print_custom_1: "JSXSKL",
+    // print_custom_2: "R",
+    incoterm: "DAP",
+    // delivered_duty_paid: true,
+    // third_party_consignee: buyerAddress,
+    // importer_address_id: "adr_66e5966a7fcc11ed9401ac1f6bc72124",
+    // importer_address_id: buyerAddress,
+    // freight_charge: "10.99",
+    // commercial_invoice_format: "PNG",
     // suppress_etd: true,
     // bill_third_party_account: 7308941,
   },
 });
 
-shipment.save().then(console.log).catch(console.log);
+shipment.save().then((s) => {
+  for (i = 0; i < s.rates.length; i++) {
+    console.log(
+      s.rates[i].carrier +
+        " " +
+        s.rates[i].service +
+        " " +
+        "$" +
+        s.rates[i].rate
+    );
+  }
+  console.log(s.id);
+});
+
+// shipment.save().then(console.log).catch(console.log);
 
 //============buy shipment by lowest rate============
 // shipment
@@ -93,9 +168,9 @@ shipment.save().then(console.log).catch(console.log);
 // ).catch(error => console.log(JSON.stringify(error, null, 2)));
 
 // ============buy shipment by ID============
-// api.Shipment.retrieve("shp_e73ce0c4f2e440e78e050b7603820218")
+// api.Shipment.retrieve("shp_bebc401fb3e2418fbe371ba509d895b8")
 //   .then((s) => {
-//     s.buy("rate_095f2f80bb584808b6f5e9c4534a020c")
+//     s.buy("rate_9d338cfd72754e12b96dff3d4bedc0b4")
 //       .then(console.log)
 //       .catch((error) => console.log(JSON.stringify(error, null, 2)));
 //   })

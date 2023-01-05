@@ -8,13 +8,17 @@ const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 //list all carrier accounts
-api.CarrierAccount.all().then(console.log);
+// api.CarrierAccount.all().then(console.log);
 
 //retrieve specific carrier account by ID
-// api.CarrierAccount.retrieve('ca_...').then(console.log);
+api.CarrierAccount.retrieve("ca_98951534b83848248ed5a83e810ad93b").then(
+  console.log
+);
 
 //update carrier account
-// api.CarrierAccount.retrieve('ca_719c4da8af8f45658aedabe96beeb3ff').then((ca) => {
-//   ca.credentials['company_name'] = 'INSERT NAME'
-//   ca.save().then(console.log);
-// }).catch(console.log);
+// api.CarrierAccount.retrieve("ca_9006efbd836b4009baafb6682feeec5e")
+//   .then((ca) => {
+//     ca.credentials["shipper_id"] = "ShipperIDTest";
+//     ca.save().then(console.log);
+//   })
+//   .catch(console.log);

@@ -6,7 +6,7 @@ const apiKey = process.env.testKey;
 const api = new Easypost(apiKey);
 
 const scanForm = new api.ScanForm({
-  shipments: ["shp_346a8d222af24af0861db3e52a3631ae"],
+  shipments: ["shp_7d9c1553667b4b98a58b7feddc0d5e2d"],
 });
 
 scanForm.save().then(console.log).catch(console.log);
