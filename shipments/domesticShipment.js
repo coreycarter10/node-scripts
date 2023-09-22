@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-// const apiKey = process.env.personalTestKey
+// const apiKey = process.env.childUserTestKey;
+// const apiKey = process.env.childUserProdKey;
 
 const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
@@ -9,64 +10,79 @@ const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
   verify: ["delivery", "zip4"],
-  // company: "Impact Custom Clubs",
-  // name: "Brandon Kida",
-  // street1: "2258 Caminito Pescado #12",
-  // // street2: "Suite 105",
-  // city: "San Diego",
-  // state: "CA",
-  // zip: "92107",
-  // country: "US",
-  // phone: "8015401281",
-  // email: "kidakat15@gmail.com",
+  // verify_strict: true,
+  // verify: ["delivery"],
+  // company: "Swing Away Golf Studio",
+  name: "Mr. EP",
+  street1: "1009 Fairway Lane",
+  // // street2: "Unit 530",
+  city: "Sherrard",
+  state: "IL",
+  zip: "61281",
+  country: "US",
+  // phone: "2705355109",
+  // residential: true,
+  // email: "swingawaygolfstudio@gmail.com",
   // residential: true,
 
-  name: "Kim Mauldin",
-  company: "EasyPost",
-  street1: "2 Royal Oaks Circle",
-  // street2: "APT# 506",
-  state: "TX",
-  city: "Denton",
-  zip: "76210",
+  // name: "Mr. EP",
+  street1: "75 Brainard Road",
+  // street2: "APT 16B",
+  city: "Hartford",
+  state: "CT",
+  zip: "6114",
   country: "US",
-  phone: "9999999999",
-  // email: "rthompson@gmail.com",
+  // phone: "4803039337",
+  // email: "lorinda@masterlinkcom.com",
 });
 
 const fromAddress = new api.Address({
   // company: "EasyPost",
   // name: "Corey Carter",
-  // street1: "37620 N Poplar road",
-  // // street2: "STE B",
-  // city: "San Tan Valley",
-  // state: "AZ",
-  // zip: "85140",
-  // country: "US",
-  // phone: "999-999-9999",
-  // email: "ccarter@easypost.com",
-
-  name: "SUTERA",
-  // company: "SUTERA",
-  street1: "3300 Wood Drive",
-  street2: "STE 200",
-  state: "TX",
-  city: "Garland",
-  zip: "75041",
-  country: "US",
-  phone: "3176983299",
-});
-
-const returnAddress = new api.Address({
-  // company: "EasyPost",
-  // name: "Corey Carter",
-  // street1: "37620 N Poplar road",
-  // // street2: "STE B",
-  // city: "San Tan Valley",
-  // state: "AZ",
-  // zip: "85140",
+  // street1: "14191 N Washington Hwy",
+  // street2: "STE B",
+  // city: "Ashland",
+  // state: "VA",
+  // zip: "23005",
   // country: "US",
   // phone: "8013761006",
   // email: "ccarter@easypost.com",
+  // residential: true,
+
+  // name: "CFO",
+  name: "Brandon Kida",
+  company: "EasyPost",
+  street1: "2558 Caminito Pescado #12",
+  // street2: "Bardon Hill",
+  state: "CA",
+  city: "San Diego",
+  zip: "92107",
+  country: "US",
+  phone: "8015401281",
+  email: "kidakat15@gmail.com",
+  // email: "swingawaygolfstudio@gmail.com",
+
+  // name: "Hey Dude Shoes",
+  // company: "Hey Dude Shoes",
+  // street1: "549 Mill Road",
+  // city: "Edison",
+  // state: "NY",
+  // zip: "08818",
+  // country: "US",
+  // phone: "908-405-4446",
+});
+
+const returnAddress = new api.Address({
+  company: "EasyPost",
+  name: "CFO",
+  street1: "4710 S Ferric",
+  // street2: "STE B",
+  city: "Mesa",
+  state: "AZ",
+  zip: "85212",
+  country: "US",
+  phone: "8013761006",
+  email: "ccarter@easypost.com",
   // name: "SUTERA",
   // company: "SUTERA",
   // street1: "3300 Wood Drive",
@@ -93,11 +109,11 @@ const returnAddress = new api.Address({
 // const fromAddress = new api.Address({ "id": "adr_b2904a39f49d4b1eb0b632395302cc78" });
 
 const parcel = new api.Parcel({
-  // predefined_package: "Letter",
-  length: 36,
-  width: 24,
+  // predefined_package: "Flat",
+  length: 18,
+  width: 6.5,
   height: 6,
-  weight: 176,
+  weight: 16,
 });
 
 // parcel.save().then(console.log);
@@ -105,39 +121,67 @@ const parcel = new api.Parcel({
 
 const shipment = new api.Shipment({
   to_address: toAddress,
+  // to_address: { id: "adr_adb3b06c42b611ee84ccac1f6bc539ae" },
   from_address: fromAddress,
-  // return_address: fromAddress,
+  return_address: fromAddress,
   // return_address: returnAddress,
   parcel: parcel,
-  // reference: "s8545144:0",
-  // carrier: "LSO",
-  // service: "ECommerce",
+  // reference: "Reference",
+  // carrier: "USPS",
+  // service: "First",
   // reference: 'Insurance testing',
   // is_return: true,
   // ancillary_endorsement: true,
   options: {
+    // print_custom: [
+    //   {
+    //     name: "print_custom_1",
+    //     value: "RMA value",
+    //     barcode: false,
+    //   },
+    //   {
+    //     name: "RMA",
+    //     value: "JQ9044",
+    //     barcode: "true",
+    //   },
+    //   {
+    //     value: "R",
+    //   },
+    // ],
+    // end_shipper_id: "es_7ea1fa877f594966980a4c477642c658",
+    // commercial_invoice_signature: "IMAGE_2",
+    // commercial_invoice_letterhead: "IMAGE_1",
+    // invoice_number: "invoice number",
+    // endorsement: "FORWARDING_SERVICE_REQUESTED",
+    // carrier_insurance_amount: 100,
+    // registered_mail: true,
+    // registered_mail_amount: 100,
     // special_rates_eligibility: "USPS.MEDIAMAIL",
     // type: "Prepaid",
     // dry_ice: true,
-    // dry_ice_weight: 160,
-    // hazmat: 'LIMITED_QUANTITY',
+    // dry_ice_weight: 5,
+    // hazmat: "CLASS_9_DRY_ICE",
     // additional_handling: true,
-    // label_date: "2022-11-29",
+    // label_date: "2023-09-25T00:00:00Z",
     // endorsement: 'ADDRESS_SERVICE_REQUESTED',
     // carrier_insurance_amount: 999.99
-    print_custom_1: "UFC",
-    print_custom_2: "Print custom 2",
-    print_custom_3: "Print custom 3",
-    // print_custom_1_code: 'reference'
-    // label_format: "ZPL",
+    // print_custom_1: "Lint Roller",
+    // print_custom_2: "Hazels in a corner?",
+    // print_custom_3: "Scout has big ears",
+    // print_custom_1_code: "PO",
+    // print_custom_2_code: "PO",
+    // label_format: "PDF",
+    // postage_label_inline: true,
+    // saturday_delivery: true,
     // import_federal_tax_id: "",
-    // label_size: '8.5X11',
+    // label_size: "4x6",
+    // label_format: "PDF",
     // commercial_invoice_letterhead: 'IMAGE_1',
     // commercial_invoice_signature: 'IMAGE_2',
     // certified_mail: true,
     // return_receipt: true,
     // dropoff_type: "DROP_BOX",
-    // delivery_confirmation: 'ADULT_SIGNATURE',
+    // delivery_confirmation: "ADULT_SIGNATURE",
     // pickup_min_datetime: '2022-02-18T07:00:00.000Z',
     // pickup_max_datetime: '2022-02-22T07:00:00.000Z',
     // delivery_min_datetime: '2022-02-18T07:00:00.000Z',
@@ -152,7 +196,7 @@ const shipment = new api.Shipment({
     //   country: 'US'
     // }
   },
-  carrier_accounts: [process.env.UPS],
+  carrier_accounts: [process.env.USPS],
   // carrier_accounts: ['ca_51c5e89603c64c04b4ed3d55a3547c8a']
 });
 
@@ -202,26 +246,26 @@ shipment.save().then((s) => {
 // shipment.save().then(console.log).catch(console.log);
 
 // ============buy shipment by lowest rate============
-shipment
-  .save()
-  .then((s) => {
-    s.buy(s.lowestRate()).then(console.log).catch(console.log);
-  })
-  .catch(console.log);
+// shipment
+//   .save()
+//   .then((s) => {
+//     s.buy(s.lowestRate()).then(console.log).catch(console.log);
+//   })
+//   .catch(console.log);
 
 // Buy Shipment by ID & rate
-// api.Shipment.retrieve("shp_a97d6d3b73c04b5f8aea3e2768c5f03b")
+// api.Shipment.retrieve("shp_eb5081f3bad24f678b3e8f27b09a2f55")
 //   .then((s) => {
-//     s.buy("rate_46aefb85bdc24bf39c5e80084134791b")
+//     s.buy("rate_858a72ffe53d4b21827cac69eb0b74c4")
 //       .then(console.log)
 //       .catch(console.log);
 //   })
 //   .catch(console.log);
 
 // ============Carbon offset Buy Shipment by ID============
-// api.Shipment.retrieve("shp_dff0d619604043ec8f5cd04858e29bbc")
+// api.Shipment.retrieve("shp_9e1383777a314d2c90b1f40bc8051016")
 //   .then((s) => {
-//     s.buy("rate_85e33a310863452e85dff5eb5685922d", null, true)
+//     s.buy("rate_dde54ce5f99e480f9a6449099523c232", null, true)
 //       .then(console.log)
 //       .catch(console.log);
 //   })

@@ -7,8 +7,8 @@ const api = new Easypost(apiKey);
 
 const report = new api.Report({
   type: "shipment",
-  start_date: "2022-08-30",
-  end_date: "2022-08-31",
+  start_date: "2023-05-01",
+  end_date: "2023-05-10",
   regenerate: true,
 });
 

@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-const apiKey = process.env.testKey;
-// const apiKey = process.env.prodKey;
+// const apiKey = process.env.testKey;
+const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 /* Either objects or ids can be passed in. If the object does
@@ -45,9 +45,9 @@ const api = new Easypost(apiKey);
 
 // insurance.save().then(console.log).catch(console.log);
 
-api.Shipment.retrieve("batch_33405d73d8ad4017bfb670d1b1f7a115")
+api.Shipment.retrieve("shp_b599aed3ce91491487e8f50c512398b8")
   .then((s) => {
-    s.insure(50)
+    s.insure(4400)
       .then(() => console.log(s))
       .catch(console.log);
   })

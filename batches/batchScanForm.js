@@ -5,8 +5,6 @@ const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
-const scanForm = new api.ScanForm({
-  shipments: ["shp_3b557ae87f204b9682db9fa35bae4ad9"],
+api.Batch.retrieve("batch_87f977d13f6e458ab08684a4387209ea").then((batch) => {
+  batch.createScanForm().then(console.log);
 });
-
-scanForm.save().then(console.log).catch(console.log);

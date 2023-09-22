@@ -1,8 +1,14 @@
 require("dotenv").config();
 const Easypost = require("@easypost/api");
 
-// const apiKey = process.env.prodKey; // prodKey
-const apiKey = process.env.testKey; // testKey
+const apiKey = process.env.prodKey; // prodKey
+// const apiKey = process.env.testKey; // testKey
+
+// const apiKey = process.env.personalTestKey;
+// const apiKey = process.env.personalProdKey;
+
+// const apiKey = process.env.childUserTestKey;
+// const apiKey = process.env.childUserProdKey;
 
 /* define api key */
 const api = new Easypost(apiKey);
@@ -106,9 +112,14 @@ const order = new api.Order({
   from_address: data.from_address,
   shipments: data.shipments,
   options: data.options,
+  // options: {
+  //   // commercial_invoice_format: "PNG",
+  //   // suppress_etd: true,
+  //   importer_address_id: "adr_faf10e56227311ee8c62ac1f6bc539ae",
+  // },
   customs_info: data.customs_info,
   // customs_info: customs_info,
-  carrier_accounts: [{ id: process.env.PUROLATOR }],
+  carrier_accounts: [{ id: process.env.FEDEX }],
 });
 
 // order

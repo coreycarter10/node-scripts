@@ -1,21 +1,31 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-// const apiKey = process.env.testKey;
-const apiKey = process.env.prodKey;
+const apiKey = process.env.testKey;
+// const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 const toAddress = new api.Address({
-  verify: ["delivery", "zip4"],
-  company: "EasyPost",
-  name: "Mr. EP",
-  street1: "817 Maxwell Ave.",
-  // street2: 'FL 10',
-  city: "Evansville",
-  state: "IN",
-  zip: "47711",
+  // verify: ["delivery", "zip4"],
+  // company: "EasyPost",
+  name: "Importer Address",
+  street1: "4710 S Ferric",
+  // street2: "FL 10",
+  city: "Mesa",
+  state: "AZ",
+  zip: "85212",
   country: "US",
   phone: "8012220000",
+  residential: false,
+  // federal_tax_id: ''
+
+  // name: "Customs Broker",
+  // street1: "2889 Ashton Boulevard",
+  // street2: "APT 16B",
+  // city: "Lehi",
+  // state: "UT",
+  // zip: "84043",
+  // country: "US",
 });
 
 // toAddress.save().then(console.log).catch(console.log);

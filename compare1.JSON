@@ -1,222 +1,39 @@
 {
-  "created_at": "2022-12-20T17:27:36Z",
-  "is_return": true,
-  "messages": [
-    {
-      "type": "rate_error",
-      "carrier": "USPS",
-      "message": "Unable to retrieve USPS rates for non-US origin address."
+  "shipment": {
+    "to_address": {
+      "name": "Jonathan Haber",
+      "company": "",
+      "street1": "1835 Corcoran Street Northwest",
+      "street2": "D",
+      "city": "Washington",
+      "state": "DC",
+      "zip": "20009",
+      "country": "US",
+      "phone": "5619908014",
+      "email": "jonathanhaber@live.com",
+      "verify": true
     },
-    {
-      "carrier": "UPSDAP",
-      "carrier_account_id": "ca_5de13e644f124fbaad6857aef9bcec48",
-      "type": "rate_error",
-      "message": "Unable to retrieve UPS (DAP) rates for non-US origin shipments."
+    "from_address": {
+      "name": "Clarkes Bookshop c/o World Container",
+      "street1": "475 DOUGHTY BLVD",
+      "street2": "",
+      "city": "Inwood",
+      "state": "NY",
+      "zip": "11096",
+      "country": "US",
+      "phone": "5163712228",
+      "email": "start@tunl.to",
+      "verify": true
     },
-    {
-      "carrier": "DHLParcel",
-      "carrier_account_id": "ca_bb15bdbc61a4497f830f4b3f2853aef7",
-      "type": "rate_error",
-      "message": "credentials.api_key: Required, credentials.user_id: Required, and shipment: No parcel type could be determined from the shipment details."
-    }
-  ],
-  "mode": "production",
-  "options": {
-    "invoice_number": "94582238EUR",
-    "print_custom_1": "94582238EUR",
-    "print_custom_2": "R",
-    "label_format": "PDF",
-    "currency": "USD",
-    "print_custom": [
-      {
-        "value": "94582238EUR"
-      },
-      {
-        "value": "R"
-      }
-    ],
-    "payment": {
-      "type": "SENDER"
+    "reference": "2428",
+    "parcel": {
+      "length": "13.8",
+      "width": "11.0",
+      "height": "2.4",
+      "weight": "17.6"
     },
-    "date_advance": 0
-  },
-  "reference": "9614",
-  "status": "unknown",
-  "tracking_code": null,
-  "updated_at": "2022-12-20T17:27:37Z",
-  "batch_id": null,
-  "batch_status": null,
-  "batch_message": null,
-  "customs_info": {
-    "id": "cstinfo_ffba1eb134b641779b554faedc34ff90",
-    "object": "CustomsInfo",
-    "created_at": "2022-12-20T17:27:36Z",
-    "updated_at": "2022-12-20T17:27:36Z",
-    "contents_explanation": null,
-    "contents_type": "returned_goods",
-    "customs_certify": true,
-    "customs_signer": "Paul Valentine GmbH support@paul-valentine.com +49 621 879 49827",
-    "eel_pfc": "NOEEI 30.37(a)",
-    "non_delivery_option": "return",
-    "restriction_comments": null,
-    "restriction_type": "none",
-    "mode": "production",
-    "declaration": null,
-    "customs_items": [
-      {
-        "id": "cstitem_b82ed16fc11c45d0a9dd19d066b2978c",
-        "object": "CustomsItem",
-        "created_at": "2022-12-20T17:27:36Z",
-        "updated_at": "2022-12-20T17:27:36Z",
-        "description": "Germany Goods Returned: Adell Necklace 18K Go",
-        "hs_tariff_number": "71179000",
-        "origin_country": "CN",
-        "quantity": 1,
-        "value": "39.88",
-        "weight": 2,
-        "code": null,
-        "mode": "production",
-        "manufacturer": null,
-        "currency": "GBP",
-        "eccn": null,
-        "printed_commodity_identifier": null
-      }
-    ]
-  },
-  "from_address": {
-    "id": "adr_988d9847808b11edb077ac1f6bc7bdc6",
-    "object": "Address",
-    "created_at": "2022-12-20T17:27:36+00:00",
-    "updated_at": "2022-12-20T17:27:36+00:00",
-    "name": "Radial Fulfillment GmbH",
-    "company": "c/o Paul Valentine GmbH",
-    "street1": "Siriusstrasse 300",
-    "street2": null,
-    "city": "Halle",
-    "state": null,
-    "zip": "06116",
-    "country": "DE",
-    "phone": "491622133692",
-    "email": null,
-    "mode": "production",
-    "carrier_facility": "PV Retourenlager GB",
-    "residential": null,
-    "federal_tax_id": null,
-    "state_tax_id": null,
-    "verifications": {}
-  },
-  "insurance": null,
-  "order_id": null,
-  "parcel": {
-    "id": "prcl_d5d487de0ed84972a4eb85d080376baf",
-    "object": "Parcel",
-    "created_at": "2022-12-20T17:27:36Z",
-    "updated_at": "2022-12-20T17:27:36Z",
-    "length": 2,
-    "width": 12,
-    "height": 6,
-    "predefined_package": null,
-    "weight": 9,
-    "mode": "production"
-  },
-  "postage_label": null,
-  "refund_status": null,
-  "scan_form": null,
-  "selected_rate": null,
-  "tracker": null,
-  "to_address": {
-    "id": "adr_9879b404808b11edbcc9ac1f6b0a0d1e",
-    "object": "Address",
-    "created_at": "2022-12-20T17:27:36+00:00",
-    "updated_at": "2022-12-20T17:27:36+00:00",
-    "name": "Pascale Honecker",
-    "company": null,
-    "street1": "5 King William Street",
-    "street2": "Greater London",
-    "city": "London",
-    "state": "England",
-    "zip": "EC4N 7DA",
-    "country": "GB",
-    "phone": "4917657834837",
-    "email": null,
-    "mode": "production",
-    "carrier_facility": null,
-    "residential": null,
-    "federal_tax_id": null,
-    "state_tax_id": null,
-    "verifications": {}
-  },
-  "usps_zone": null,
-  "return_address": {
-    "id": "adr_988d9847808b11edb077ac1f6bc7bdc6",
-    "object": "Address",
-    "created_at": "2022-12-20T17:27:36+00:00",
-    "updated_at": "2022-12-20T17:27:36+00:00",
-    "name": "Radial Fulfillment GmbH",
-    "company": "c/o Paul Valentine GmbH",
-    "street1": "Siriusstrasse 300",
-    "street2": null,
-    "city": "Halle",
-    "state": null,
-    "zip": "06116",
-    "country": "DE",
-    "phone": "491622133692",
-    "email": null,
-    "mode": "production",
-    "carrier_facility": "PV Retourenlager GB",
-    "residential": null,
-    "federal_tax_id": null,
-    "state_tax_id": null,
-    "verifications": {}
-  },
-  "buyer_address": {
-    "id": "adr_9879b404808b11edbcc9ac1f6b0a0d1e",
-    "object": "Address",
-    "created_at": "2022-12-20T17:27:36+00:00",
-    "updated_at": "2022-12-20T17:27:36+00:00",
-    "name": "Pascale Honecker",
-    "company": null,
-    "street1": "5 King William Street",
-    "street2": "Greater London",
-    "city": "London",
-    "state": "England",
-    "zip": "EC4N 7DA",
-    "country": "GB",
-    "phone": "4917657834837",
-    "email": null,
-    "mode": "production",
-    "carrier_facility": null,
-    "residential": null,
-    "federal_tax_id": null,
-    "state_tax_id": null,
-    "verifications": {}
-  },
-  "object": "Shipment",
-  "rates": [
-    {
-      "object": "Rate",
-      "created_at": "2022-12-20T17:27:37Z",
-      "updated_at": "2022-12-20T17:27:37Z",
-      "mode": "production",
-      "service": "ReturnIntl",
-      "carrier": "DHLPaket",
-      "rate": "0.01",
-      "currency": "USD",
-      "retail_rate": null,
-      "retail_currency": null,
-      "list_rate": null,
-      "list_currency": null,
-      "billing_type": "carrier",
-      "delivery_days": null,
-      "delivery_date": null,
-      "delivery_date_guaranteed": false,
-      "est_delivery_days": null,
-      "shipment_id": "shp_e76dbbea102b4b5fb0f8c55f43a906e8",
-      "carrier_account_id": "ca_7245e0e00f584e658697a7625b90db38",
-      "id": "rate_0cc2614d1c0049b49948559a8c0fd418"
-    }
-  ],
-  "forms": [],
-  "fees": [],
-  "id": "shp_e76dbbea102b4b5fb0f8c55f43a906e8"
+    "service": "Ground",
+    "carrier_accounts": ["ca_d07a61d3411846a380c4052a016ba50c"],
+    "options": { "print_custom_1": "2428" }
+  }
 }

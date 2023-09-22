@@ -1,0 +1,15 @@
+{
+  "type": "Consignee",
+  "primaryId": "",
+  "additionalId": "",
+  "account": "",
+  "name": "Charu Kulkarni",
+  "postCode": "33316",
+  "street": "2791 Davie Blvd",
+  "street2": null,
+  "city": "Fort Lauderdale",
+  "state": "FL",
+  "countryId": "US",
+  "phoneNumber": "5555555555",
+  "email": "charu.kulkarni@smartkargocom",
+}

@@ -5,4 +5,4 @@ const apiKey = process.env.testKey;
 // const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
-api.Shipment.retrieve("shp_e99ec12150054b36a931af997b3e0985").then(console.log);
+api.Shipment.retrieve("shp_be2019c080274e989809ae3405036894").then(console.log);

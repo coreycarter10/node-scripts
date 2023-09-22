@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-// const apiKey = process.env.testKey;
-const apiKey = process.env.prodKey;
+const apiKey = process.env.testKey;
+// const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
 const verifiableAddress = new api.Address({
@@ -19,12 +19,16 @@ const verifiableAddress = new api.Address({
   // phone: "8015401281",
   // email: "ccarter@easypost.com",
   name: "Mr. EP",
-  street1: "500 Edgemont Road",
-  // street2: "",
-  city: "Charlottesville",
-  state: "VA",
-  zip: "22903",
-  country: "US",
+  street1: "Lomas de Tarango",
+  // street2: "BLDG 13 Unit 5",
+  city: "Mexico City",
+  state: "DF",
+  zip: "01580",
+  country: "MX",
+  // 43 Myeongdong-gil, Jung-gu, Seoul, South Korea
+  // phone: "+82-010-9099-8867",
+  // email: "williamsanghee@gmail.com",
+
   // phone: "6042236185",
   // email: "MAARTEN.STAM@YAHOO.NL",
 });

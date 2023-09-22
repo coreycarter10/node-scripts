@@ -1,16 +1,13 @@
 require("dotenv").config();
 
 const Easypost = require("@easypost/api");
-const apiKey = process.env.testKey;
-// const apiKey = process.env.prodKey;
+// const apiKey = process.env.testKey;
+const apiKey = process.env.prodKey;
 const api = new Easypost(apiKey);
 
-api.Order.retrieve("order_374749c99d4d48acbf5f63f52c9f2ba8")
+api.Order.retrieve("order_3154e09681ae47febb5d3e738fd720b5")
   .then((order) => {
-    order
-      .buy("AustraliaPost", "IntlStandardPackTrack")
-      .then(console.log)
-      .catch(console.log);
+    order.buy("FedEx", "FEDEX_GROUND").then(console.log).catch(console.log);
   })
   .catch(console.log);
 
